@@ -1,0 +1,2 @@
+start cmd.exe /k "cd /d C:\Program Files\MongoDB\Server\7.0\bin && mongod.exe --dbpath C:\Users\Fernandez\Documents\DESARROLLO_FULL_STACK\semana_5\data-mongo"
+start cmd.exe /k "cd /d C:\Users\Fernandez\Documents\DESARROLLO_FULL_STACK\semana_5\api-rest-social-network && npm start"
