@@ -8,7 +8,6 @@ This project is an Express API built with Express.
 
 To start the service, use the following command:
 ~~~
-bash
 npm start
 ~~~
 
