@@ -2,6 +2,9 @@
 import connection from './connection/db.js';
 import express from 'express';
 import cors from 'cors';
+import userRouter  from './routers/user.js';
+import followRouter  from './routers/follow.js';
+import publicationRouter  from './routers/publication.js';
 
 console.log('API Node UP');
 
@@ -20,6 +23,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Configurar rutas
+
+app.use('/api/user', userRouter);
+app.use('/api/publication', publicationRouter);
+app.use('/api/follow', followRouter);
+
 app.get('/test-route', (req, res) => {
   return res.status(200).json(
     {
