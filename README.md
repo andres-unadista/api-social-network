@@ -9,9 +9,9 @@ This project is an Express API built with Express.
 To start the service, use the following command:
 
 ```bash
-npm start
+npm start`
 
 Before running the above command, ensure you have MongoDB running. You can use the script start-project.bat to automate this process:
-./start-project.bat
+`./start-project.bat`
 
 This script will handle starting both MongoDB and the Node server.
