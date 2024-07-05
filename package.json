@@ -4,7 +4,7 @@
   "description": "API REST con stack MERN y autenticación JWT para una red social",
   "main": "index.js",
   "scripts": {
-    "start": "npm run start:watch",
+    "start": "node index.js",
     "start:watch": "node --watch index.js"
   },
   "type": "module",
