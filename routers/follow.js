@@ -7,7 +7,7 @@ import { ensureAuth } from '../middlewares/auth.js';
 // Definir las rutas
 router.post('/', ensureAuth, saveFollow);
 router.get('/test-follow', testFollow);
-router.post('/unfollow/:id', ensureAuth, unfollow);
+router.delete('/unfollow/:id', ensureAuth, unfollow);
 router.get('/profile/:id', ensureAuth, profile);
 router.get('/following/:id?/:page?', ensureAuth, following);
 router.get('/followers/:id?/:page?', ensureAuth, followers);

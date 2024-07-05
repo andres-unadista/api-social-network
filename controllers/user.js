@@ -194,6 +194,9 @@ export const listUsers = async (req, res) => {
       });
     }
 
+    // Listar los seguidores de un usuario, obtener el array de IDs de los usuarios que sigo
+    let followUsers = await followUserIds(req);
+
     // Devolver los usuarios paginados
     return res.status(200).json({
       status: 'success',
@@ -206,6 +209,8 @@ export const listUsers = async (req, res) => {
       hasNextPage: users.hasNextPage,
       prevPage: users.prevPage,
       nextPage: users.nextPage,
+      users_following: followUsers.following,
+      user_follow_me: followUsers.followers,
     });
   } catch (error) {
     console.log('Error al listar los usuarios:', error);
