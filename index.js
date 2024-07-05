@@ -1,23 +1,24 @@
-// connection
+// Importaciones
 import connection from './connection/db.js';
 import express from 'express';
 import cors from 'cors';
-import userRouter from './routers/user.js';
-import followRouter from './routers/follow.js';
-import publicationRouter from './routers/publication.js';
+import UserRoutes from './routers/user.js';
+import PublicationRoutes from './routers/publication.js';
+import FollowRoutes from './routers/follow.js';
 import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
 
-dotenv.config();
+// Mensaje de bienvenida
+console.log('API NODE arriba');
 
-console.log('API Node UP');
-
-// use db
+// Conexión a la BD
 connection();
 
-// Crear servidor
+// Crear servidor de Node
 const app = express();
-const port = process.env.PORT || 3900;
+const puerto = process.env.PORT || 3900;
 
 // Configurar cors: permite que las peticiones se hagan correctamente
 app.use(
@@ -32,21 +33,24 @@ app.use(
 // Conversión de datos (body a objetos JS)
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 // Configurar rutas
+app.use('/api/user', UserRoutes);
+app.use('/api/publication', PublicationRoutes);
+app.use('/api/follow', FollowRoutes);
 
-app.use('/api/user', userRouter);
-app.use('/api/publication', publicationRouter);
-app.use('/api/follow', followRouter);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-app.get('/test-route', (req, res) => {
-  return res.status(200).json({
-    id: 1,
-    name: 'Andrés Felipe Fernández',
-    username: 'andrew',
-  });
+// Configuración para servir archivos estáticos (imágenes de avatar)
+app.use('/uploads/avatars', express.static(path.join(__dirname, 'uploads', 'avatars')));
+
+// Configuración para servir archivos estáticos (imágenes de publicaciones)
+app.use('/uploads/publications', express.static(path.join(__dirname, 'uploads', 'publications')));
+
+// Configurar el servidor para escuchar las peticiones HTTP
+app.listen(puerto, () => {
+  console.log('Servidor de NODE corriendo en el puerto', puerto);
 });
 
-// Configurar el servidor
-app.listen(port, () => {
-  console.log(`Server run on port ${port}`);
-});
+export default app;
